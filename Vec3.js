@@ -49,4 +49,8 @@ export default class Vec3 {
     this.z = vec3.z;
     return this;
   }
+  
+  magnitude() {
+    return (this.dot(this)) ** 0.5;
+  }
 }
