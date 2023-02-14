@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    html, body {
-      margin: 0px;
+    html,
+    body {
+      margin: 5px;
+      background-color: rgb(42, 39, 55);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: relative;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 80%;
+      box-shadow: 0 0 50px black;
+    }
+
+    pre {
+      overflow: auto;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    a {
+      display: block;
+      color: white;
     }
   </style>
   <title>Vectors</title>
@@ -14,5 +40,72 @@
 
 <body>
   <script type='module' src="main.js"></script>
+  <canvas></canvas>
+  <div id="fps">FPS: <span></span></div>
+  <h1>Methods</h1>
+  <ol>
+    <li><a href="#add">Vec3.add()</a></li>
+    <li><a href="#sub">Vec3.subtract()</a></li>
+    <li><a href="#dot">Vec3.dot()</a></li>
+    <li><a href="#cro">Vec3.cross()</a></li>
+    <li><a href="#mul">Vec3.multiply()</a></li>
+    <li><a href="#cop">Vec3.copy()</a></li>
+    <li><a href="#mag">Vec3.mag()</a></li>
+    <li><a href="#ref">Vec3.reflect()</a></li>
+    <li><a href="#dir">Vec3.directionCosine() and Vec3.directionSine()</a></li>
+    <li><a href="#set">Vec3.setMagnitude()</a></li>
+    <li><a href="#nor">Vec3.normalize()</a></li>
+    <li><a href="#rot">Vec3.rotate()</a></li>
+  </ol>
+
+  <h2 id="add">Vec3.add()</h2>
+  <p>Using the Vec3.add() method we can add <strong><em>a</em></strong> and <strong><em>b</em></strong> together.</p>
+  <pre><code>
+    let a = new Vec3(1, 0, 0);
+    let b = new Vec3(0, 1, 0);
+
+    a.add(b); // modifies a where the values in a are the summations in each axis
+    console.log(a); // returns Vec3 {x: 1, y: 1, z: 0}
+    </code></pre>
+
+  <h2 id="sub">Vec3.subtract()</h2>
+  <p>Using the Vec3.subtract() method we can subtract <strong><em>b</em></strong> from <strong><em>a</em></strong>.</p>
+  <pre><code>
+    let a = new Vec3(1, 0, 0);
+    let b = new Vec3(0, 1, 0);
+
+    a.subtract(b); // modifies a where the values in a are the differences in each axis
+    console.log(a); // returns Vec3 {x: 1, y: -1, z: 0}
+    </code></pre>
+
+  <h2 id="dot">Vec3.dot()</h2>
+
+  <h2 id="cro">Vec3.cross()</h2>
+
+  <h2 id="mul">Vec3.multiply()</h2>
+
+  <h2 id="cop">Vec3.copy()</h2>
+
+  <h2 id="mag">Vec3.magnitude()</h2>
+
+  <h2 id="ref">Vec3.reflect()</h2>
+
+  <h2 id="dir">Vec3.directionCosine() and Vec3.directionSine()</h2>
+  <p>Vec3.directionCosine() finds the cosine of the angle between between the caller and the input vectors, and
+    Vec3.directionSine() finds the sine of the angle between the vectors.</p>
+  <pre><code>
+    let a = new Vec3(1, 0, 0);
+    let b = new Vec3(0, 1, 0);
+
+    a.directionCosine(b); // returns 0
+    a.directionSine(b); // returns 1
+    </code></pre>
+
+  <h2 id="set">Vec3.setMagnitude()</h2>
+
+  <h2 id="nor">Vec3.normalize()</h2>
+
+  <h2 id="rot">Vec3.rotate()</h2>
 </body>
+
 </html>

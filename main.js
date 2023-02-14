@@ -1,9 +1,9 @@
 import Vec3 from './Vec3.js';
 
 (function () {
-  const canvas = document.createElement('canvas');
+  const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
-  const fpsDiv = document.createElement('div');
+  const fpsDiv = document.querySelector('#fps span');
   const entities = [];
   const numberOfEntities = 1000;
   const placeholder = new Vec3;
@@ -28,12 +28,6 @@ import Vec3 from './Vec3.js';
     canvas.width = 400;
     canvas.height = 400;
 
-    canvas.style.width = '600px';
-    canvas.style.height = '600px';
-
-    document.body.appendChild(canvas);
-    document.body.appendChild(fpsDiv);
-
     for (let i = 0; i < numberOfEntities; i++) {
       entities.push({
         pos: new Vec3(canvas.width * 0.5, canvas.height * 0.5),
@@ -44,8 +38,8 @@ import Vec3 from './Vec3.js';
 
     let a = new Vec3(1, 0, 0);
     let b = new Vec3(0, 1, 0);
-
-    console.log(a.directionCosine(b), a.directionSine(b));
+    a.subtract(b);
+    console.log(a)
 
     update();
   }
