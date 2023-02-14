@@ -38,6 +38,7 @@ function init() {
     entities.push({
       pos: new Vec3(canvas.width * 0.5, canvas.height * 0.5),
       vel: new Vec3((Math.random() - 0.5) * 100, (Math.random() - 0.5) * 100),
+      angularSpeed: (Math.random() - 0.5) * 0.1
     });
   }
   
@@ -50,22 +51,23 @@ function update() {
     let p = entities[i].pos;
     let v = entities[i].vel;
   
+    v.rotate(0, 0, entities[i].angularSpeed);
     p.add(placeholder.copy(v).multiply(dt));
   
     if (p.x > canvas.width) {
-      reflect(v, normals.right);
+      v.reflect(normals.right);
       p.x = canvas.width;
     }
     if (p.x < 0) {
-      reflect(v, normals.left);
+      v.reflect(normals.left);
       p.x = 0;
     }
     if (p.y > canvas.height) {
-      reflect(v, normals.top);
+      v.reflect(normals.top);
       p.y = canvas.height;
     }
     if (p.y < 0) {
-      reflect(v, normals.bottom);
+      v.reflect(normals.bottom);
       p.y = 0;
     }
   }
@@ -85,14 +87,12 @@ function update() {
     ctx.stroke();
   }
   
-  // draws circles
+  // draws entities
   ctx.fillStyle = color(colors.blue);
   for (let i = 0; i < entities.length; i++) {
     let p = entities[i].pos;
     
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
-    ctx.fill();
+    ctx.fillRect(p.x - 5, p.y - 5, 10, 10);
   }
   
   // draws velocity vectors
@@ -114,12 +114,6 @@ function update() {
   fpsDiv.innerText = (1 / dt).toFixed(0);
   
   requestAnimationFrame(update);
-}
-
-// credit: https://math.stackexchange.com/questions/13261/how-to-get-a-reflection-vector
-function reflect(vec3, normal) {
-  placeholder.copy(normal);
-  vec3.subtract(placeholder.multiply(2 * vec3.dot(placeholder)));
 }
 
 function color(vec3) {
