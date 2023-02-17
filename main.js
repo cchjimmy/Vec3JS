@@ -35,7 +35,7 @@ import Vec3 from './Vec3.js';
         angularSpeed: (Math.random() - 0.5) * 0.1
       });
     }
-
+    
     update();
   }
 
