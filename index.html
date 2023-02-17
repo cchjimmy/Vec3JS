@@ -6,29 +6,53 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    html,
+    html {
+      box-sizing: border-box;
+    }
+
     body {
-      margin: 5px;
+      margin: 10px;
       background-color: rgb(42, 39, 55);
       color: white;
-      overflow-x: hidden;
     }
 
     canvas {
-      position: relative;
+      z-index: -1;
+      position: fixed;
+      top: 50%;
       left: 50%;
-      transform: translate(-50%, 0);
-      width: 80%;
-      box-shadow: 0 0 50px black;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 20px black;
+      opacity: 0.1;
+      
     }
 
     pre {
       overflow: auto;
+      box-shadow: inset 0 0 10px black;
     }
 
+    /* width */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    /* Track */
     ::-webkit-scrollbar-track {
       background: transparent;
     }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background: #ffffff;
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
 
     a {
       display: block;
@@ -42,58 +66,121 @@
   <script type='module' src="main.js"></script>
   <canvas></canvas>
   <div id="fps">FPS: <span></span></div>
-  <h1>Methods</h1>
-  <ol>
-    <li><a href="#add">Vec3.add()</a></li>
-    <li><a href="#sub">Vec3.subtract()</a></li>
-    <li><a href="#dot">Vec3.dot()</a></li>
-    <li><a href="#cro">Vec3.cross()</a></li>
-    <li><a href="#mul">Vec3.multiply()</a></li>
-    <li><a href="#cop">Vec3.copy()</a></li>
-    <li><a href="#mag">Vec3.mag()</a></li>
-    <li><a href="#ref">Vec3.reflect()</a></li>
-    <li><a href="#dir">Vec3.directionCosine() and Vec3.directionSine()</a></li>
-    <li><a href="#set">Vec3.setMagnitude()</a></li>
-    <li><a href="#nor">Vec3.normalize()</a></li>
-    <li><a href="#rot">Vec3.rotate()</a></li>
-  </ol>
+  <h1>Vec3JS - Documentation</h1>
+  <section>
+    <h2>Constructor</h2>
+    <pre><code>
+    constructor(x = 0, y = 0, z = 0) {
+      this.x = x;
+      this.y = y;
+      this.z = z;
+    }
+  </code></pre>
+    <ul>
+      <li>x: number - Magnitude in x.</li>
+      <li>y: number - Magnitude in y.</li>
+      <li>z: number - Magnitude in z.</li>
+    </ul>
+    <p>Returns - A new Vec3 object.</p>
+  </section>
 
-  <h2 id="add">Vec3.add()</h2>
-  <p>Using the Vec3.add() method we can add <strong><em>a</em></strong> and <strong><em>b</em></strong> together.</p>
-  <pre><code>
+  <section>
+    <h2>Methods</h2>
+    <ol>
+      <li><a href="#add">Vec3.add()</a></li>
+      <li><a href="#sub">Vec3.subtract()</a></li>
+      <li><a href="#dot">Vec3.dot()</a></li>
+      <li><a href="#cro">Vec3.cross()</a></li>
+      <li><a href="#mul">Vec3.multiply()</a></li>
+      <li><a href="#cop">Vec3.copy()</a></li>
+      <li><a href="#mag">Vec3.magnitude()</a></li>
+      <li><a href="#ref">Vec3.reflect()</a></li>
+      <li><a href="#dir">Vec3.directionCosine() and Vec3.directionSine()</a></li>
+      <li><a href="#set">Vec3.setMagnitude()</a></li>
+      <li><a href="#nor">Vec3.normalize()</a></li>
+      <li><a href="#rot">Vec3.rotate()</a></li>
+    </ol>
+
+    <h3 id="add">Vec3.add()</h3>
+    <p>3D vector addition. Adds each corresponding term in x, y, z of the input vector to the caller vector.</p>
+    <pre><code>
     let a = new Vec3(1, 0, 0);
     let b = new Vec3(0, 1, 0);
 
     a.add(b); // modifies a where the values in a are the summations in each axis
     console.log(a); // returns Vec3 {x: 1, y: 1, z: 0}
-    </code></pre>
+  </code></pre>
 
-  <h2 id="sub">Vec3.subtract()</h2>
-  <p>Using the Vec3.subtract() method we can subtract <strong><em>b</em></strong> from <strong><em>a</em></strong>.</p>
-  <pre><code>
+    <h3 id="sub">Vec3.subtract()</h3>
+    <p>3D vector subtraction. subtract each corresponding term in x, y, z of the input vector from the caller vector.
+    </p>
+    <pre><code>
     let a = new Vec3(1, 0, 0);
     let b = new Vec3(0, 1, 0);
 
     a.subtract(b); // modifies a where the values in a are the differences in each axis
     console.log(a); // returns Vec3 {x: 1, y: -1, z: 0}
-    </code></pre>
+  </code></pre>
 
-  <h2 id="dot">Vec3.dot()</h2>
+    <h3 id="dot">Vec3.dot()</h3>
+    <p>3D vector dot product, summation of the multiplication of separate terms.</p>
+    <pre><code>
+    let a = new Vec3(1, 0, 0);
+    let b = new Vec3(0, 1, 0);
 
-  <h2 id="cro">Vec3.cross()</h2>
+    console.log(a.dot(b)) // returns 0
+  </code></pre>
 
-  <h2 id="mul">Vec3.multiply()</h2>
+    <h3 id="cro">Vec3.cross()</h3>
+    <p>3D vector cross product, calculation of determinant of a 3x3 matrix with first row being the amplitude of unit
+      vectors in x, y and z, second row is the caller vector and the third row is the input vector.</p>
+    <pre><code>
+    let a = new Vec3(1, 0, 0);
+    let b = new Vec3(0, 1, 0);
 
-  <h2 id="cop">Vec3.copy()</h2>
+    console.log(a.cross(b)) // returns Vec3 {x: 0, y: -0, z: 1}. Y is -0 because of the sign matrix
+  </code></pre>
 
-  <h2 id="mag">Vec3.magnitude()</h2>
+    <h3 id="mul">Vec3.multiply()</h3>
+    <p>Multiplication of scalar value into the caller vector. Input accepts scalar values only.</p>
+    <pre><code>
+    let a = new Vec3(1, 2, 3);
 
-  <h2 id="ref">Vec3.reflect()</h2>
+    console.log(a.multiply(10)); // returns Vec3 {x: 10, y: 20, z: 30}
+  </code></pre>
 
-  <h2 id="dir">Vec3.directionCosine() and Vec3.directionSine()</h2>
-  <p>Vec3.directionCosine() finds the cosine of the angle between between the caller and the input vectors, and
-    Vec3.directionSine() finds the sine of the angle between the vectors.</p>
-  <pre><code>
+    <h3 id="cop">Vec3.copy()</h3>
+    <p>Creates a new Vec3 and copies the value from the source input vector.</p>
+    <pre><code>
+    let a = new Vec3(3, 4, 5);
+    let b = new Vec3().copy(a);
+
+    b.multiply(2);
+
+    console.log(a, b); // returns Vec3 {x: 3, y: 4, z: 5} Vec3 {x: 6, y: 8, z: 10}
+  </code></pre>
+
+    <h3 id="mag">Vec3.magnitude()</h3>
+    <p>Calculates the magnitude of the caller vector.</p>
+    <pre><code>
+    let a = new Vec3(3, 4);
+
+    console.log(a.magnitude()); // returns 5
+  </code></pre>
+
+    <h3 id="ref">Vec3.reflect()</h3>
+    <p>Reflects the caller vector using the input surface normal vector.</p>
+    <pre><code>
+    let a = new Vec3(1, 3, 2);
+    let normal = new Vec3(0, 0, 1);
+
+    console.log(a.reflect(normal)); // returns Vec3 {x: 1, y: 3, z: -2}
+  </code></pre>
+
+    <h3 id="dir">Vec3.directionCosine() and Vec3.directionSine()</h3>
+    <p>Vec3.directionCosine() finds the cosine of the angle between between the caller and the input vectors, and
+      Vec3.directionSine() finds the sine of the angle between the vectors.</p>
+    <pre><code>
     let a = new Vec3(1, 0, 0);
     let b = new Vec3(0, 1, 0);
 
@@ -101,11 +188,33 @@
     a.directionSine(b); // returns 1
     </code></pre>
 
-  <h2 id="set">Vec3.setMagnitude()</h2>
+    <h3 id="set">Vec3.setMagnitude()</h3>
+    <p>Set the magnitude of the caller vector to the input value</p>
+    <pre><code>
+    let a = new Vec3(10, 15, 20);
+    a.setMagnitude(5);
 
-  <h2 id="nor">Vec3.normalize()</h2>
+    console.log(a.magnitude(), a); // returns 5 Vec3 {x: 1.8569533817705186, y: 2.785430072655778, z: 3.713906763541037}
+  </code></pre>
 
-  <h2 id="rot">Vec3.rotate()</h2>
+    <h3 id="nor">Vec3.normalize()</h3>
+    <p>Sets the magnitude of the caller vector to 1.</p>
+    <pre><code>
+    let a = new Vec3(100, -213, 124);
+    a.normalize();
+
+    console.log(a); // returns Vec3 {x: 0.37596907555952885, y: -0.8008141309417964, z: 0.4662016536938158}
+  </code></pre>
+
+    <h3 id="rot">Vec3.rotate()</h3>
+    <p>Rotates the caller vector by the amount specified in the 3 axes. Input expects values in radians.</p>
+    <pre><code>
+    let a = new Vec3(1);
+    a.rotate(0, 0, Math.PI).rotate(0, 0, Math.PI * 0.5);
+
+    console.log(a); // returns Vec3 {x: -1.8369701987210297e-16, y: -1, z: 0}. X is negligible.
+  </code></pre>
+  </section>
 </body>
 
 </html>

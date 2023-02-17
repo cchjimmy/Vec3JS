@@ -1,4 +1,10 @@
 export default class Vec3 {
+  /**
+   * 
+   * @param {number} x Magnitude in x
+   * @param {number} y Magnitude in y
+   * @param {number} z Magnitude in z
+   */
   constructor(x = 0, y = 0, z = 0) {
     this.x = x;
     this.y = y;

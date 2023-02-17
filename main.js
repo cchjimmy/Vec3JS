@@ -5,7 +5,7 @@ import Vec3 from './Vec3.js';
   const ctx = canvas.getContext('2d');
   const fpsDiv = document.querySelector('#fps span');
   const entities = [];
-  const numberOfEntities = 1000;
+  const numberOfEntities = 600;
   const placeholder = new Vec3;
   var last = performance.now();
   var dt = 0;
@@ -35,11 +35,6 @@ import Vec3 from './Vec3.js';
         angularSpeed: (Math.random() - 0.5) * 0.1
       });
     }
-
-    let a = new Vec3(1, 0, 0);
-    let b = new Vec3(0, 1, 0);
-    a.subtract(b);
-    console.log(a)
 
     update();
   }
@@ -86,11 +81,11 @@ import Vec3 from './Vec3.js';
     }
 
     // draws entities
-    ctx.fillStyle = color(colors.blue);
+    ctx.strokeStyle = color(colors.blue);
     for (let i = 0; i < entities.length; i++) {
       let p = entities[i].pos;
 
-      ctx.fillRect(p.x - 5, p.y - 5, 10, 10);
+      ctx.strokeRect(p.x - 5, p.y - 5, 10, 10);
     }
 
     // draws velocity vectors
