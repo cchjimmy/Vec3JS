@@ -48,7 +48,8 @@ import Vec3 from './Vec3.js';
       e=Math.cos(a);
       f=Math.sin(a);
     })
-    console.log(`Below shows the performance and results of Vec3.directionSine() and Vec3.directionCosine() vs Math.sin() and Math.cosine() with 60 degrees or pi / 3.\n\nVec3\nTime: ${time1} ms\nCosine: ${c}\nSine: ${d}\n\nMath\nTime: ${time2} ms\nCosine: ${e}\nSine: ${f}`)
+    console.log(`Below shows the performance and results of Vec3.directionSine() and Vec3.directionCosine() vs Math.sin() and Math.cosine() with 60 degrees or pi / 3.\n\nVec3\nTime: ${time1} ms\nCosine: ${c}\nSine: ${d}\n\nMath\nTime: ${time2} ms\nCosine: ${e}\nSine: ${f}`);
+    
     update();
   }
   
@@ -90,34 +91,40 @@ import Vec3 from './Vec3.js';
 
     // draws position vectors
     ctx.strokeStyle = color(colors.white);
+    ctx.beginPath();
     for (let i = 0; i < entities.length; i++) {
       let p = entities[i].pos;
 
-      ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(p.x, p.y);
-      ctx.stroke();
     }
+    ctx.stroke();
 
     // draws entities
     ctx.strokeStyle = color(colors.blue);
+    ctx.beginPath();
     for (let i = 0; i < entities.length; i++) {
       let p = entities[i].pos;
 
-      ctx.strokeRect(p.x - 5, p.y - 5, 10, 10);
+      ctx.moveTo(p.x - 5, p.y - 5);
+      ctx.lineTo(p.x + 5, p.y - 5);
+      ctx.lineTo(p.x + 5, p.y + 5);
+      ctx.lineTo(p.x - 5, p.y + 5);
+      ctx.lineTo(p.x - 5, p.y - 5);
     }
+    ctx.stroke();
 
     // draws velocity vectors
     ctx.strokeStyle = color(colors.red);
+    ctx.beginPath();
     for (let i = 0; i < entities.length; i++) {
       let p = entities[i].pos;
       let v = entities[i].vel;
-
-      ctx.beginPath();
+      
       ctx.moveTo(p.x, p.y);
       ctx.lineTo(p.x + v.x, p.y + v.y);
-      ctx.stroke();
     }
+    ctx.stroke();
 
     let now = performance.now();
     dt = (now - last) * 0.001;
