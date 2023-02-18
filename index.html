@@ -123,7 +123,7 @@
   </code></pre>
 
     <h3 id="dot">Vec3.dot()</h3>
-    <p>3D vector dot product, summation of the multiplication of separate terms.</p>
+    <p>3D vector dot product. Summation of the multiplication of separate terms.</p>
     <pre><code>
     let a = new Vec3(1, 0, 0);
     let b = new Vec3(0, 1, 0);
@@ -184,8 +184,8 @@
     let a = new Vec3(1, 0, 0);
     let b = new Vec3(0, 1, 0);
 
-    a.directionCosine(b); // 0
-    a.directionSine(b); // 1
+    console.log(a.directionCosine(b)); // 0
+    console.log(a.directionSine(b)); // 1
     </code></pre>
 
     <h3 id="set">Vec3.setMagnitude()</h3>
@@ -212,8 +212,9 @@
     let a = new Vec3(1);
     a.rotate(0, 0, Math.PI).rotate(0, 0, Math.PI * 0.5);
     
-    // x is negligible.
     console.log(a); // Vec3 {x: -1.8369701987210297e-16, y: -1, z: 0}
+    
+    // x is negligible.
   </code></pre>
   </section>
 </body>
