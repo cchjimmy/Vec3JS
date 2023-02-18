@@ -1,9 +1,9 @@
 export default class Vec3 {
   /**
    * 
-   * @param {number} x Magnitude in x
-   * @param {number} y Magnitude in y
-   * @param {number} z Magnitude in z
+   * @param {number} x Magnitude in x.
+   * @param {number} y Magnitude in y.
+   * @param {number} z Magnitude in z.
    */
   constructor(x = 0, y = 0, z = 0) {
     this.x = x;
@@ -12,9 +12,9 @@ export default class Vec3 {
   }
 
   /**
-   * Adds the input vector to this vector
-   * @param {Vec3} vec3 The other addend
-   * @returns 
+   * Adds the input vector to this vector.
+   * @param {Vec3} vec3 The other addend.
+   * @returns {Vec3} This vector.
    */
   add(vec3) {
     this.x += vec3.x;
@@ -24,9 +24,9 @@ export default class Vec3 {
   }
 
   /**
-   * Subtracts input vector from this vector
-   * @param {Vec3} vec3 The subtrahend
-   * @returns 
+   * Subtracts input vector from this vector.
+   * @param {Vec3} vec3 The subtrahend.
+   * @returns {Vec3} this vector.
    */
   subtract(vec3) {
     this.x -= vec3.x;
@@ -37,26 +37,26 @@ export default class Vec3 {
 
   /**
    * Dot product between this vector and the input vector
-   * @param {Vec3} vec3 This is the b vector in a ⋅ b
-   * @returns 
+   * @param {Vec3} vec3 This is the b vector in a ⋅ b.
+   * @returns {number} The product scalar.
    */
   dot(vec3) {
     return this.x * vec3.x + this.y * vec3.y + this.z * vec3.z;
   }
 
   /**
-   * Cross product between this vector and the input vector
-   * @param {Vec3} vec3 This is the b vector in a x b
-   * @returns 
+   * Cross product between this vector and the input vector.
+   * @param {Vec3} vec3 This is the b vector in a x b.
+   * @returns {Vec3} The product vector.
    */
   cross(vec3) {
-    return new Vec3(this.y * vec3.z - this.z * vec3.y, -(this.x * vec3.z - this.z * vec3.x), this.x * vec3.y - this.y * vec3.x);
+    return new Vec3(this.y * vec3.z - this.z * vec3.y, -1 * (this.x * vec3.z - this.z * vec3.x), this.x * vec3.y - this.y * vec3.x);
   }
 
   /**
-   * Multiplies each term in this vector with the input value
-   * @param {number} scalar The multiplicand
-   * @returns 
+   * Multiplies each term in this vector with the input value.
+   * @param {number} scalar The multiplicand.
+   * @returns {Vec3} This vector.
    */
   multiply(scalar) {
     this.x *= scalar;
@@ -66,9 +66,9 @@ export default class Vec3 {
   }
 
   /**
-   * 
+   * Sets the values in this vector to the values of the input vector.
    * @param {Vec3} vec3 Source vector to copy from
-   * @returns This vector with values from the source vector
+   * @returns {Vec3} This vector.
    */
   copy(vec3) {
     this.x = vec3.x;
@@ -78,17 +78,17 @@ export default class Vec3 {
   }
 
   /**
-   * 
-   * @returns Magnitude of this vector
+   * Calculates the magnitude of this vector.
+   * @returns {number} The magnitude.
    */
   magnitude() {
     return (this.dot(this)) ** 0.5;
   }
 
   /**
-   * Reflects this vector using the input vector
-   * @param {Vec3} normal Surface normal, magnitude must be 1
-   * @returns 
+   * Reflects this vector using the input vector.
+   * @param {Vec3} normal Surface normal, magnitude must be 1.
+   * @returns {Vec3} This vector.
    */
   reflect(normal) {
     // the reason for this implementation is to reduce the creation of objects to improve performance
@@ -101,18 +101,18 @@ export default class Vec3 {
   }
 
   /**
-   * Uses dot product to find cos(angle) between this vector and the input vector
-   * @param {Vec3} from A vector defining where to find cos(angle) from
-   * @returns cos(angle)
+   * Uses dot product to find cosine of the angle between this vector and the input vector.
+   * @param {Vec3} from A vector defining where to find the angle from.
+   * @returns {number} Cosine of the angle.
    */
   directionCosine(from) {
     return this.dot(from) / (this.magnitude() * from.magnitude());
   }
 
   /**
-   * Uses cross product to find sin(angle) between this vector and the input vector
-   * @param {Vec3} from A vector defining where to find sin(angle) from
-   * @returns sin(angle)
+   * Uses cross product to find sin of the angle between this vector and the input vector.
+   * @param {Vec3} from A vector defining where to find the angle from.
+   * @returns {number} Sine of the angle.
    */
   directionSine(from) {
     // credit: https://www.cuemath.com/geometry/angle-between-vectors/
@@ -120,9 +120,9 @@ export default class Vec3 {
   }
 
   /**
-   * Modifies the magnitude of this vector to the input value
-   * @param {number} magnitude Target magnitude
-   * @returns 
+   * Modifies the magnitude of this vector to match the input value.
+   * @param {number} magnitude Target magnitude.
+   * @returns {Vec3} This vector.
    */
   setMagnitude(magnitude) {
     this.normalize();
@@ -133,8 +133,8 @@ export default class Vec3 {
   }
 
   /**
-   * Modifies the magnitude of this vector to 1
-   * @returns 
+   * Modifies the magnitude of this vector to 1.
+   * @returns {Vec3} This vector.
    */
   normalize() {
     let m = this.magnitude();
@@ -145,10 +145,11 @@ export default class Vec3 {
   }
 
   /**
-   * Rotates the vector from the origin reference frame with unit vectors x, y, z. Input values are expected to be in radians.
-   * @param {number} rx amount of rotation about x axis
-   * @param {number} ry amount of rotation about y axis
-   * @param {number} rz amount of rotation about z axis
+   * Rotates this vector relative to its current orientation. Input values are expected to be in radians.
+   * @param {number} rx amount of rotation about x axis.
+   * @param {number} ry amount of rotation about y axis.
+   * @param {number} rz amount of rotation about z axis.
+   * @return {Vec3} This vector.
    */
   rotate(rx = 0, ry = 0, rz = 0) {
     // credit: https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations

@@ -112,7 +112,7 @@
   </code></pre>
 
     <h3 id="sub">Vec3.subtract()</h3>
-    <p>3D vector subtraction. subtract each corresponding term in x, y, z of the input vector from the caller vector.
+    <p>3D vector subtraction. Subtracts each corresponding term in x, y, z of the input vector from the caller vector.
     </p>
     <pre><code>
     let a = new Vec3(1, 0, 0);
@@ -138,9 +138,7 @@
     let a = new Vec3(1, 0, 0);
     let b = new Vec3(0, 1, 0);
 
-    console.log(a.cross(b)) // Vec3 {x: 0, y: -0, z: 1}
-    
-    // y is -0 because of the sign matrix
+    console.log(a.cross(b)) // Vec3 {x: 0, y: 0, z: 1}
   </code></pre>
 
     <h3 id="mul">Vec3.multiply()</h3>
@@ -171,7 +169,7 @@
   </code></pre>
 
     <h3 id="ref">Vec3.reflect()</h3>
-    <p>Reflects the caller vector using the input surface normal vector.</p>
+    <p>Reflects the caller vector using the input surface normal vector, which must have a magnitude of 1. This implementation of the method does not make an attempt to modify the input vector's magnitude or ensures that it has a magnitude of 1. This is to reduce the amount of checks to improve performance.</p>
     <pre><code>
     let a = new Vec3(1, 3, 2);
     let normal = new Vec3(0, 0, 1);
@@ -186,8 +184,8 @@
     let a = new Vec3(1, 0, 0);
     let b = new Vec3(0, 1, 0);
 
-    a.directionCosine(b); // returns 0
-    a.directionSine(b); // returns 1
+    a.directionCosine(b); // 0
+    a.directionSine(b); // 1
     </code></pre>
 
     <h3 id="set">Vec3.setMagnitude()</h3>
@@ -213,10 +211,9 @@
     <pre><code>
     let a = new Vec3(1);
     a.rotate(0, 0, Math.PI).rotate(0, 0, Math.PI * 0.5);
-
-    console.log(a); // Vec3 {x: -1.8369701987210297e-16, y: -1, z: 0}
     
     // x is negligible.
+    console.log(a); // Vec3 {x: -1.8369701987210297e-16, y: -1, z: 0}
   </code></pre>
   </section>
 </body>

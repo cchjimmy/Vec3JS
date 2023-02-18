@@ -36,7 +36,26 @@ import Vec3 from './Vec3.js';
       });
     }
     
+    let c, d, e, f;
+    let time1 = measureFunc(()=>{
+      let a = new Vec3(1, 3**0.5);
+      let b = new Vec3(1, 0);
+      c=a.directionCosine(b);
+      d=a.directionSine(b);
+    })
+    let time2 = measureFunc(()=>{
+      let a = Math.PI/3;
+      e=Math.cos(a);
+      f=Math.sin(a);
+    })
+    console.log(`Below shows the performance and results of Vec3.directionSine() and Vec3.directionCosine() vs Math.sin() and Math.cosine() with 60 degrees or pi / 3.\n\nVec3\nTime: ${time1} ms\nCosine: ${c}\nSine: ${d}\n\nMath\nTime: ${time2} ms\nCosine: ${e}\nSine: ${f}`)
     update();
+  }
+  
+  function measureFunc(func) {
+    let past = performance.now();
+    func();
+    return performance.now() - past;
   }
 
   function update() {
