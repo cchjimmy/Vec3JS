@@ -35,24 +35,24 @@ import Vec3 from './Vec3.js';
         angularSpeed: (Math.random() - 0.5) * 0.1
       });
     }
-    
+
     let c, d, e, f;
-    let time1 = measureFunc(()=>{
-      let a = new Vec3(1, 3**0.5);
+    let time1 = measureFunc(() => {
+      let a = new Vec3(1, 3 ** 0.5);
       let b = new Vec3(1, 0);
-      c=a.directionCosine(b);
-      d=a.directionSine(b);
+      c = a.cosine(b);
+      d = a.sine(b);
     })
-    let time2 = measureFunc(()=>{
-      let a = Math.PI/3;
-      e=Math.cos(a);
-      f=Math.sin(a);
+    let time2 = measureFunc(() => {
+      let a = Math.PI / 3;
+      e = Math.cos(a);
+      f = Math.sin(a);
     })
-    console.log(`Below shows the performance and results of Vec3.directionSine() and Vec3.directionCosine() vs Math.sin() and Math.cosine() with 60 degrees or pi / 3.\n\nVec3\nTime: ${time1} ms\nCosine: ${c}\nSine: ${d}\n\nMath\nTime: ${time2} ms\nCosine: ${e}\nSine: ${f}`);
-    
+    console.log(`Below shows the performance and results of Vec3.sine() and Vec3.cosine() vs Math.sin() and Math.cosine() with 60 degrees or pi / 3.\n\nVec3\nTime: ${time1} ms\nCosine: ${c}\nSine: ${d}\n\nMath\nTime: ${time2} ms\nCosine: ${e}\nSine: ${f}`);
+
     update();
   }
-  
+
   function measureFunc(func) {
     let past = performance.now();
     func();
@@ -120,7 +120,7 @@ import Vec3 from './Vec3.js';
     for (let i = 0; i < entities.length; i++) {
       let p = entities[i].pos;
       let v = entities[i].vel;
-      
+
       ctx.moveTo(p.x, p.y);
       ctx.lineTo(p.x + v.x, p.y + v.y);
     }

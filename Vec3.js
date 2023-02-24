@@ -105,7 +105,7 @@ export default class Vec3 {
    * @param {Vec3} from A vector defining where to find the angle from.
    * @returns {number} Cosine of the angle.
    */
-  directionCosine(from) {
+  cosine(from) {
     return this.dot(from) / (this.magnitude() * from.magnitude());
   }
 
@@ -114,7 +114,7 @@ export default class Vec3 {
    * @param {Vec3} from A vector defining where to find the angle from.
    * @returns {number} Sine of the angle.
    */
-  directionSine(from) {
+  sine(from) {
     // credit: https://www.cuemath.com/geometry/angle-between-vectors/
     return this.cross(from).magnitude() / (this.magnitude() * from.magnitude());
   }

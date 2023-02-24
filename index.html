@@ -95,7 +95,7 @@
       <li><a href="#cop">Vec3.copy()</a></li>
       <li><a href="#mag">Vec3.magnitude()</a></li>
       <li><a href="#ref">Vec3.reflect()</a></li>
-      <li><a href="#dir">Vec3.directionCosine() and Vec3.directionSine()</a></li>
+      <li><a href="#dir">Vec3.cosine() and Vec3.sine()</a></li>
       <li><a href="#set">Vec3.setMagnitude()</a></li>
       <li><a href="#nor">Vec3.normalize()</a></li>
       <li><a href="#rot">Vec3.rotate()</a></li>
@@ -177,15 +177,15 @@
     console.log(a.reflect(normal)); // Vec3 {x: 1, y: 3, z: -2}
   </code></pre>
 
-    <h3 id="dir">Vec3.directionCosine() and Vec3.directionSine()</h3>
-    <p>Vec3.directionCosine() finds the cosine of the angle between between the caller and the input vectors, and
-      Vec3.directionSine() finds the sine of the angle between the vectors.</p>
+    <h3 id="dir">Vec3.cosine() and Vec3.sine()</h3>
+    <p>Vec3.cosine() finds the cosine of the angle between between the caller and the input vectors, and
+      Vec3.sine() finds the sine of the angle between the vectors.</p>
     <pre><code>
     let a = new Vec3(1, 0, 0);
     let b = new Vec3(0, 1, 0);
 
-    console.log(a.directionCosine(b)); // 0
-    console.log(a.directionSine(b)); // 1
+    console.log(a.cosine(b)); // 0
+    console.log(a.sine(b)); // 1
     </code></pre>
 
     <h3 id="set">Vec3.setMagnitude()</h3>
