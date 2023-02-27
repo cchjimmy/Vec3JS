@@ -82,7 +82,7 @@ export default class Vec3 {
    * @returns {number} The magnitude.
    */
   magnitude() {
-    return (this.dot(this)) ** 0.5;
+    return this.dot(this) ** 0.5;
   }
 
   /**
@@ -126,10 +126,7 @@ export default class Vec3 {
    */
   setMagnitude(magnitude) {
     this.normalize();
-    this.x *= magnitude;
-    this.y *= magnitude;
-    this.z *= magnitude;
-    return this;
+    return this.multiply(magnitude);
   }
 
   /**
@@ -153,9 +150,9 @@ export default class Vec3 {
    */
   rotate(rx = 0, ry = 0, rz = 0) {
     // credit: https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations
-    let x = this.x;
-    let y = this.y;
-    let z = this.z;
+    let _x = this.x;
+    let _y = this.y;
+    let _z = this.z;
     let cx = Math.cos(rx);
     let cy = Math.cos(ry);
     let cz = Math.cos(rz);
@@ -163,9 +160,9 @@ export default class Vec3 {
     let sy = Math.sin(ry);
     let sz = Math.sin(rz);
 
-    this.x = x * cy * cz + y * (sx * sy * cz - cx * sz) + z * (cx * sy * cz + sx * sz);
-    this.y = x * cy * sz + y * (sx * sy * sz + cx * cz) + z * (cx * sy * sz - sx * cz);
-    this.z = x * -sy + y * sx * cy + z * cx * cy;
+    this.x = _x * cy * cz + _y * (sx * sy * cz - cx * sz) + _z * (cx * sy * cz + sx * sz);
+    this.y = _x * cy * sz + _y * (sx * sy * sz + cx * cz) + _z * (cx * sy * sz - sx * cz);
+    this.z = _x * -sy + _y * sx * cy + _z * cx * cy;
     return this;
   }
 }
